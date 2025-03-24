@@ -1,0 +1,21 @@
+{
+  "name": "luigi-example-openui5",
+  "private": true,
+  "version": "0.2.0",
+  "author": "SAP SE",
+  "description": "Luigi with OpenUI5 Demo App",
+  "scripts": {
+    "build": "ui5 build --all",
+    "start": "ui5 serve --open index.html",
+    "serve": "ws --compress -d dist"
+  },
+  "dependencies": {
+    "@luigi-project/client": "^2.18.0",
+    "@luigi-project/core": "^2.18.0"
+  },
+  "devDependencies": {
+    "@ui5/cli": "3.11.6",
+    "cross-spawn": "^7.0.6",
+    "local-web-server": "^5.4.0"
+  }
+}
