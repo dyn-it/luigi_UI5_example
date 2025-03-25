@@ -10,12 +10,14 @@ Luigi.setConfig({
         viewUrl: 'openui5.html#/home',
         children: [
           {
+            category: { label: 'Samples' },
             pathSegment: 'sample1',
             label: 'First',
             icon: 'nutrition-activity',
             viewUrl: 'sample1/sample1.html'
           },
           {
+            category: { label: 'Samples 2' },
             pathSegment: 'sample2',
             label: 'Second',
             icon: 'paper-plane',
@@ -29,7 +31,7 @@ Luigi.setConfig({
             }
           },
           {
-            category: 'Links',
+            category: { label: 'Links' },
             label: 'OpenUI5',
             externalLink: {
               url: 'https://openui5.hana.ondemand.com/'
@@ -49,7 +51,7 @@ Luigi.setConfig({
   },
   settings: {
     header: {
-      title: 'Luigi OpenUI5',
+      title: 'Luigi OpenUI5 Test App',
       logo: '/logo.png',
       favicon: '/favicon.ico'
     },

@@ -1,0 +1,12 @@
+specVersion: "2.6"
+metadata:
+  name: luigi-example-openui5
+type: application
+resources:
+  configuration:
+    paths:
+      webapp: dist
+framework:
+  name: OpenUI5
+  version: "1.111.0"
+

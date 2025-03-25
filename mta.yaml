@@ -1,0 +1,18 @@
+---
+_schema-version: 3.3.0
+ID: luigi-example-openui5
+version: 0.2.0
+description: "Luigi with OpenUI5 Demo App"
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm install
+modules:
+  - name: luigi-app
+    path: .
+    type: html5
+
+resources: []
