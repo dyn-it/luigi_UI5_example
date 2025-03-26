@@ -1,6 +1,6 @@
 ---
 _schema-version: 3.3.0
-ID: luigi-example-openui5
+ID: luigi-example-openui5-new
 version: 0.2.0
 description: "Luigi with OpenUI5 Demo App"
 parameters:
@@ -11,7 +11,7 @@ build-parameters:
       commands:
         - npm install
 modules:
-  - name: luigi-app
+  - name: luigi-app-new
     path: .
     type: html5
 
