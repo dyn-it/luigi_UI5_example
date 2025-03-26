@@ -1,18 +1,79 @@
----
-_schema-version: 3.3.0
 ID: luigi-example-openui5
-version: 0.2.0
-description: "Luigi with OpenUI5 Demo App"
-parameters:
-  enable-parallel-deployments: true
-build-parameters:
-  before-all:
-    - builder: custom
+description: mta descriptor for ui5 app with standalone approuter setup
+_schema-version: "3.1"
+version: 1.0.0
+
+modules:
+  - name: approuter
+    type: approuter.nodejs
+    path: ./approuter
+    parameters:
+      routes:
+        - route: https://${default-host}.${default-domain}
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: ui5-standalone-html5repo-runtime #needed for accessing the html5 app content
+      - name: ui5-standalone-destination #needed to connect to external data services
+      - name: ui5-standalone-uaa #needed for authentication & authorization (scope checks)
+  - name: html5-deployer
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: ui5-shared-repo-host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - luigi.zip
+          name: luigi
+          target-path: resources/
+  - name: luigi
+    type: html5
+    path: .
+    build-parameters:
+      build-result: dist
+      builder: custom
       commands:
         - npm install
-modules:
-  - name: luigi-app
-    path: .
-    type: html5
+        - npm run build:cf
+      supported-platforms: []
 
-resources: []
+resources:
+  - name: ui5-shared-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+      service-key:
+        name: ui5-shared-repo-host-key
+  - name: ui5-standalone-html5repo-runtime
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-runtime
+  - name: ui5-standalone-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            destinations:
+            - Authentication: NoAuthentication
+              Name: ui5
+              ProxyType: Internet
+              Type: HTTP
+              URL: https://ui5.sap.com
+            existing_destinations_policy: ignore
+        version: 1.0.0
+      service-plan: lite
+      service: destination
+  - name: ui5-standalone-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa

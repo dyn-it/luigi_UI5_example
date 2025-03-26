@@ -4,9 +4,9 @@
   "sessionTimeout": 240,
   "routes": [
     {
-      "source": "^/(.*)$",
+      "source": "^(.*)$",
       "target": "$1",
-      "localDir": "webapp"
+      "service": "html5-apps-repo-rt"
     }
   ]
 }

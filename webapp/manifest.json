@@ -85,5 +85,9 @@
         }
       }
     }
-  }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "luigidemo"
+}
 }
