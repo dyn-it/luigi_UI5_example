@@ -8,8 +8,8 @@
     "node": "^18 || ^20"
   },
   "scripts": {
-    "build": "ui5 build self-contained --clean-dest --all",
-    "start": "node server.js",
+    "build": "ui5 build --clean-dest --all",
+    "start": "fiori run --open 'index.html'",
     "serve": "ws --compress -d dist"
   },
   "dependencies": {
